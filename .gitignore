@@ -1,0 +1,5 @@
+# Local Docker build workspace (west checkout, build trees, firmware output)
+.build/
+
+# Editor / OS cruft
+.DS_Store
