@@ -1,5 +1,15 @@
 # Local Docker build workspace (west checkout, build trees, firmware output)
 .build/
 
+# Native west workspace checked out into the repo root by `west init && west update`.
+# (Keep our tracked zephyr/module.yml, which marks this repo as a Zephyr module.)
+/.west/
+/zmk/
+/modules/
+/optional/
+/build/
+/zephyr/
+!/zephyr/module.yml
+
 # Editor / OS cruft
 .DS_Store
