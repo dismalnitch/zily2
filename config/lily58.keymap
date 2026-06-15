@@ -54,7 +54,7 @@
 &trans     &trans           &trans        &trans        &trans        &trans                          &trans     &trans         &trans        &trans                &trans                 &trans
 &kp TILDE  &kp EXCLAMATION  &kp AT_SIGN   &kp HASH      &kp DOLLAR    &kp PERCENT                     &kp CARET  &kp AMPERSAND  &kp ASTERISK  &kp LEFT_PARENTHESIS  &kp RIGHT_PARENTHESIS  &kp BACKSPACE
 &kp GRAVE  &kp NUMBER_1     &kp NUMBER_2  &kp NUMBER_3  &kp NUMBER_4  &kp NUMBER_5                    &kp TILDE  &kp MINUS      &kp EQUAL     &kp LEFT_BRACE        &kp RIGHT_BRACE        &kp PIPE
-&trans     &kp NUMBER_6     &kp NUMBER_7  &kp NUMBER_8  &kp NUMBER_9  &kp NUMBER_0  &trans    &trans  &kp LC(B)  &kp MINUS      &kp PLUS      &kp LEFT_BRACKET      &kp RIGHT_BRACKET      &kp BACKSLASH
+&trans     &kp NUMBER_6     &kp NUMBER_7  &kp NUMBER_8  &kp NUMBER_9  &kp NUMBER_0  &trans    &trans  &kp LC(B)  &kp UNDER      &kp PLUS      &kp LEFT_BRACKET      &kp RIGHT_BRACKET      &kp BACKSLASH
                                           &trans        &trans        &trans        &tog 3    &trans  &tog 3     &trans         &trans
             >;
 
@@ -70,17 +70,17 @@
             //                     |      |      |      |        |  |       |      |       |       |
 
             bindings = <
-&trans  &trans  &trans  &trans  &trans  &trans                            &trans     &trans    &trans        &trans     &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &trans                            &trans     &trans    &trans        &trans     &trans  &kp DEL
-&trans  &trans  &trans  &trans  &trans  &trans                            &kp LEFT   &kp DOWN  &kp UP_ARROW  &kp RIGHT  &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &trans  &bt BT_PRV    &bt BT_NXT  &kp LC(B)  &trans    &trans        &trans     &trans  &trans
-                        &trans  &trans  &tog 3  &trans        &tog 3      &trans     &trans    &trans
+&trans     &trans           &trans        &trans        &trans        &trans                                  &trans     &trans         &trans        &trans                &trans                 &trans
+&kp TILDE  &kp EXCLAMATION  &kp AT_SIGN   &kp HASH      &kp DOLLAR    &kp PERCENT                             &kp CARET  &kp AMPERSAND  &kp ASTERISK  &kp LEFT_PARENTHESIS  &kp RIGHT_PARENTHESIS  &kp DEL
+&kp GRAVE  &kp NUMBER_1     &kp NUMBER_2  &kp NUMBER_3  &kp NUMBER_4  &kp NUMBER_5                            &kp LEFT   &kp DOWN       &kp UP_ARROW  &kp RIGHT             &trans                 &kp PIPE
+&trans     &kp NUMBER_6     &kp NUMBER_7  &kp NUMBER_8  &kp NUMBER_9  &kp NUMBER_0  &bt BT_PRV    &bt BT_NXT  &kp LC(B)  &trans         &trans        &trans                &trans                 &kp BACKSLASH
+                                          &trans        &trans        &tog 3        &trans        &tog 3      &trans     &trans         &trans
             >;
 
             sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN>;
         };
 
-        layer_3 {
+        lock_layer {
             bindings = <
 &trans  &trans  &trans  &trans  &trans  &bt BT_CLR_ALL                               &bt BT_CLR    &trans        &trans        &trans        &trans        &trans
 &trans  &trans  &trans  &trans  &trans  &trans                                       &trans        &trans        &trans        &trans        &trans        &trans
