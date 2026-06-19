@@ -3,4 +3,48 @@ on: [push, pull_request, workflow_dispatch]
 
 jobs:
   build:
-    uses: zmkfirmware/zmk/.github/workflows/build-user-config.yml@main
+    runs-on: ubuntu-latest
+    # Same image build.sh uses locally — carries the board-source fix that the
+    # upstream build-user-config.yml reusable workflow doesn't. Runner is amd64,
+    # so no QEMU emulation (unlike Apple Silicon locally).
+    container:
+      image: zmkfirmware/zmk-build-arm:stable
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Build firmware
+        run: |
+          set -euo pipefail
+          REPO="$GITHUB_WORKSPACE"
+          WS="$RUNNER_TEMP/zmk-ws"
+          BOARD="nice_nano//zmk"
+
+          # West workspace lives outside the repo so its zmk/zephyr clones don't
+          # collide with the repo's own zephyr/ module dir (mirrors build.sh).
+          mkdir -p "$WS/.west"
+          cat > "$WS/.west/config" <<'EOF'
+          [manifest]
+          path = config
+          file = west.yml
+          EOF
+          ln -sfn "$REPO/config" "$WS/config"
+
+          cd "$WS"
+          west update
+          export ZEPHYR_BASE="$WS/zephyr"
+          west zephyr-export
+
+          mkdir -p "$REPO/firmware"
+          for shield in lily58_left lily58_right; do
+            echo ">> Building $shield"
+            west build -p -s zmk/app -b "$BOARD" -d "build/$shield" -- \
+              -DSHIELD="$shield" -DZMK_CONFIG="$REPO/config"
+            cp "build/$shield/zephyr/zmk.uf2" "$REPO/firmware/zily2_${shield}.uf2"
+          done
+
+      - name: Upload firmware
+        uses: actions/upload-artifact@v4
+        with:
+          name: zily2-firmware
+          path: firmware/*.uf2
