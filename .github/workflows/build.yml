@@ -14,6 +14,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Build firmware
+        shell: bash
         run: |
           set -euo pipefail
           REPO="$GITHUB_WORKSPACE"
@@ -39,7 +40,7 @@ jobs:
           for shield in lily58_left lily58_right; do
             echo ">> Building $shield"
             west build -p -s zmk/app -b "$BOARD" -d "build/$shield" -- \
-              -DSHIELD="$shield" -DZMK_CONFIG="$REPO/config"
+              -DSHIELD="$shield nice_view_adapter nice_view" -DZMK_CONFIG="$REPO/config"
             cp "build/$shield/zephyr/zmk.uf2" "$REPO/firmware/zily2_${shield}.uf2"
           done
 

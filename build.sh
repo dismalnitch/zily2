@@ -66,7 +66,7 @@ build_one() {
   local shield="$1"
   echo ">> Building $shield"
   west build -p -s zmk/app -b '"$BOARD"' -d "build/$shield" -- \
-    -DSHIELD="$shield" -DZMK_CONFIG=/workspace/config
+    -DSHIELD="$shield nice_view_adapter nice_view" -DZMK_CONFIG=/workspace/config
   # Name the artifact zily2_<shield>.uf2
   cp "build/$shield/zephyr/zmk.uf2" "/workspace/output/zily2_${shield}.uf2"
   echo ">> Wrote output/zily2_${shield}.uf2"
